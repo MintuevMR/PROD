@@ -1,0 +1,9 @@
+# Игнорировать папки
+/build/
+/idea/
+/vscode/
+/node_modules/
+
+# Игнорировать файлы
+*.log
+*.env
