@@ -6,7 +6,7 @@ interface IUseThemeResult {
     theme: Theme;
 }
 
-export function useThene(): IUseThemeResult {
+export function useTheme(): IUseThemeResult {
     const { theme, setTheme } = useContext(ThemeContext);
     const toggleTheme = () => {
         const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
