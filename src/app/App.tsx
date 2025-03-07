@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
 import { classNames } from '../shared/lib/classNames/classNames';
 import { AppRouter } from './providers/router';
 import './styles/index.scss';
 import { Navbar } from 'widgets/Navbar';
 import { useTheme } from './providers/ThemeProviders/lib/useTheme';
 import { Sidebar } from 'widgets/Sidebar/ui';
+import { Suspense } from 'react';
+import { LangSwitcher } from 'widgets/LangSwitcher';
 
 const App = () => {
 
@@ -12,11 +13,13 @@ const App = () => {
 
     return (
         <div className={classNames('app', {}, [theme])}>
-            <Navbar />
-            <div className='content-page'>
-                <Sidebar />
-                <AppRouter />
-            </div>
+            <Suspense fallback=''>
+                <Navbar />
+                <div className='content-page'>
+                    <Sidebar />
+                    <AppRouter />
+                </div>
+            </Suspense>
         </div>
     );
 };
