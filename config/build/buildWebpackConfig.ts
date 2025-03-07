@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import { BuildOptions } from "./types/config";
+import { BuildOptions } from './types/config';
 import { buildPlugins } from './buildPlugins';
 import { buildLoaders } from './buildLoaders';
 import { buildResolvers } from './buildResolvers';
@@ -12,7 +12,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
         output: {
             path: options.paths.build,
             filename: '[name].[contenthash].js',
-            clean: true
+            clean: true,
         },
         plugins: buildPlugins(options),
         module: {
@@ -20,6 +20,6 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
         },
         resolve: buildResolvers(options),
         devtool: options.isDev ? 'inline-source-map' : undefined,
-        devServer: options.isDev ? buildDevServer(options) : undefined
+        devServer: options.isDev ? buildDevServer(options) : undefined,
     };
 }

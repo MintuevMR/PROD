@@ -1,6 +1,6 @@
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import ThemeProvider from './app/providers/ThemeProviders/ui/ThemeProvider';
+import { ThemeProvider } from 'app/providers/ThemeProviders';
 import App from './app/App';
 import 'shared/config/i18n/i18n';
 
@@ -9,5 +9,6 @@ render(
         <ThemeProvider>
             <App />
         </ThemeProvider>
-    </BrowserRouter>, document.getElementById('root')
-)
+    </BrowserRouter>,
+    document.getElementById('root'),
+);

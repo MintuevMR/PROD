@@ -14,11 +14,11 @@ i18n
     .use(initReactI18next)
     .init({
         fallbackLng: Lang.RU,
-        debug: __IS_DEV__ ? true : false,
+        debug: !!__IS_DEV__,
 
         interpolation: {
             escapeValue: false,
-        }
+        },
     });
 
 export default i18n;

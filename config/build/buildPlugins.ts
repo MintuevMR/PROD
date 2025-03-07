@@ -1,12 +1,12 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from"mini-css-extract-plugin";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildOptions } from './types/config';
 
 export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstance[] {
     return [
         new HtmlWebpackPlugin({
-            template: options.paths.html
+            template: options.paths.html,
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash:8].css',
@@ -17,5 +17,5 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
             __IS_DEV__: JSON.stringify(options.isDev),
         }),
         new webpack.HotModuleReplacementPlugin(),
-    ]
+    ];
 }
