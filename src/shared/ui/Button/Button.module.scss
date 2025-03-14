@@ -1,13 +1,11 @@
 .Button {
     cursor: pointer;
+    color: var(--primary-color);
 }
 
 .clear {
     padding: 0;
     border: none;
-    font: inherit;
-    color: inherit;
     background: none;
     outline: none;
-    background-color: transparent;
 }
