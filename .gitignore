@@ -7,3 +7,4 @@
 # Игнорировать файлы
 *.log
 *.env
+*storybook.log
