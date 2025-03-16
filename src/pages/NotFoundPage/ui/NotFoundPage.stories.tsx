@@ -5,7 +5,7 @@ import { NotFoundPage } from './NotFoundPage';
 
 const meta: Meta<typeof NotFoundPage> = {
     title: 'pages/NotFoundPage',
-    component: NotFoundPage
+    component: NotFoundPage,
 };
 export default meta;
 
@@ -18,5 +18,4 @@ export const Light: Story = {
 export const Dark: Story = {
     args: {},
 };
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
-
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

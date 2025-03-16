@@ -3,7 +3,6 @@ import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDeco
 import { Theme } from 'app/providers/ThemeProvider';
 import { Navbar } from './Navbar';
 
-
 const meta: Meta<typeof Navbar> = {
     title: 'widget/Navbar',
     component: Navbar,
@@ -21,5 +20,4 @@ export const Dark: Story = {
     args: {
     },
 };
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
-
+Dark.decorators = [ThemeDecorator(Theme.DARK)];
