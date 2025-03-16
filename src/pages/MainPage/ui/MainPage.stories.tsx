@@ -5,7 +5,7 @@ import MainPage from './MainPage';
 
 const meta: Meta<typeof MainPage> = {
     title: 'pages/MainPage',
-    component: MainPage
+    component: MainPage,
 };
 export default meta;
 
@@ -18,5 +18,4 @@ export const Light: Story = {
 export const Dark: Story = {
     args: {},
 };
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
-
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

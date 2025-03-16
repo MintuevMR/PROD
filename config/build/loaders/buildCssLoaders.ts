@@ -1,4 +1,4 @@
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export function buildCssLoaders(isDev: boolean) {
     return {
@@ -20,4 +20,3 @@ export function buildCssLoaders(isDev: boolean) {
         ],
     };
 }
-

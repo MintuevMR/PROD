@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button, ThemeButton } from './Button';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
+import { Button, ThemeButton } from './Button';
 
 const meta: Meta<typeof Button> = {
     title: 'shared/Button',
@@ -15,27 +15,27 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
     args: {
-        children: 'Text'
+        children: 'Text',
     },
 };
 export const PrimaryDark: Story = {
     args: {
-        children: 'Text'
+        children: 'Text',
     },
 };
-PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)]
+PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const Clear: Story = {
     args: {
         children: 'Text',
-        theme: ThemeButton.CLEAR
+        theme: ThemeButton.CLEAR,
     },
 };
 
 export const ClearDark: Story = {
     args: {
         children: 'Text',
-        theme: ThemeButton.CLEAR
+        theme: ThemeButton.CLEAR,
     },
 };
-ClearDark.decorators = [ThemeDecorator(Theme.DARK)]
+ClearDark.decorators = [ThemeDecorator(Theme.DARK)];

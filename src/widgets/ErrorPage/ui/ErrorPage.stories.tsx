@@ -3,7 +3,6 @@ import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDeco
 import { Theme } from 'app/providers/ThemeProvider';
 import { ErrorPage } from './ErrorPage';
 
-
 const meta: Meta<typeof ErrorPage> = {
     title: 'widget/ErrorPage',
     component: ErrorPage,
@@ -21,5 +20,4 @@ export const Dark: Story = {
     args: {
     },
 };
-Dark.decorators = [ThemeDecorator(Theme.DARK)]
-
+Dark.decorators = [ThemeDecorator(Theme.DARK)];
