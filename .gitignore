@@ -5,6 +5,9 @@
 /node_modules/
 /storybook-static/
 
+.loki/report.html
+.loki/report.json
+
 # Игнорировать файлы
 *.log
 *.env
