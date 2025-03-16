@@ -15,32 +15,25 @@ jobs:
         node-version: [18.x]
 
     steps:
-      # Шаг 1: Проверка кода
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Шаг 2: Установка Node.js
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Шаг 3: Установка зависимостей
       - name: Install dependencies
         run: npm install
 
-      # Шаг 4: Запуск линтинга (TS)
+      - name: Build production project
+        run: npm run build:prod
+
       - name: Run linting for TS
         run: npm run lint:ts
 
-      # Шаг 5: Запуск линтинга (SCSS)
       - name: Run linting for SCSS
         run: npm run lint:css
 
-      # Шаг 6: Запуск тестов
       - name: Run unit tests
         run: npm test:unit
-
-      # Шаг 7: Сборка проекта
-      - name: Build production project
-        run: npm run build:prod
