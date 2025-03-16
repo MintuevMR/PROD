@@ -1,16 +1,20 @@
 name: Linting, Testing, Build
-on: 
-  push: 
+
+on:
+  push:
     branches: ['main']
-  pull_request: 
+  pull_request:
     branches: ['main']
+
 jobs:
-  pipeline: 
+  pipeline:
     runs-on: ubuntu-latest
-    strategy: 
-      matrix: 
-        node-version: [ 18.x ]
-steps:
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
       # Шаг 1: Проверка кода
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,15 +33,14 @@ steps:
       - name: Run linting for TS
         run: npm run lint:ts
 
-      # Шаг 4: Запуск линтинга (SCSS)
+      # Шаг 5: Запуск линтинга (SCSS)
       - name: Run linting for SCSS
         run: npm run lint:css
 
-      # Шаг 5: Запуск тестов
+      # Шаг 6: Запуск тестов
       - name: Run unit tests
         run: npm test:unit
 
-      # Шаг 6: Сборка проекта
+      # Шаг 7: Сборка проекта
       - name: Build production project
         run: npm run build:prod
-
