@@ -11,12 +11,14 @@ interface ModalProps {
     children?: ReactNode;
     className?: string;
     onClose?: () => void;
+    lazy?: boolean;
 }
 
 const Modal: FC<ModalProps> = ({
-    className, children, isOpen, onClose,
+    className, children, isOpen, onClose, lazy,
 }) => {
     const [isClosing, setIsClosing] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
     const { theme } = useTheme();
 
@@ -36,7 +38,16 @@ const Modal: FC<ModalProps> = ({
     };
 
     useEffect(() => () => { clearTimeout(timerRef.current); }, []);
+    useEffect(() => {
+        if (isOpen) {
+            setIsMounted(true);
+        }
+        // return () => setIsMounted(false);
+    }, [isOpen]);
 
+    if (lazy && !isMounted) {
+        return null;
+    }
     return (
         <Portal>
             <div className={classNames(cls.Modal, mods, [className])}>
@@ -52,4 +63,5 @@ const Modal: FC<ModalProps> = ({
         </Portal>
     );
 };
+
 export default Modal;

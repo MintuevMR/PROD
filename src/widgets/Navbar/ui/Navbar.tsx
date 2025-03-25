@@ -3,6 +3,7 @@ import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import Modal from 'shared/ui/Modal/Modal';
 import { useCallback, useState } from 'react';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
+import { LoginModal } from 'features/AuthByUserName';
 import cls from './Navbar.module.scss';
 
 interface NavbarProps {
@@ -12,8 +13,12 @@ interface NavbarProps {
 export const Navbar = ({ className }: NavbarProps) => {
     const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
 
-    const onToggleAuthModal = useCallback(() => {
-        setIsOpenAuthModal((prev) => !prev);
+    const onClosehModal = useCallback(() => {
+        setIsOpenAuthModal(false);
+    }, []);
+
+    const onShowModal = useCallback(() => {
+        setIsOpenAuthModal(true);
     }, []);
 
     return (
@@ -23,15 +28,11 @@ export const Navbar = ({ className }: NavbarProps) => {
                 <Button
                     theme={ThemeButton.CLEAR}
                     className={cls.link}
-                    onClick={onToggleAuthModal}
+                    onClick={onShowModal}
                 >
                     Войти
                 </Button>
-                <Modal isOpen={isOpenAuthModal} onClose={onToggleAuthModal}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sequi amet perspiciatis quaerat harum, molestiae assumenda,
-                    porro ut nihil adipisci quas voluptas asperiores minus
-                </Modal>
+                <LoginModal isOpen={isOpenAuthModal} onClose={onClosehModal} />
             </div>
         </div>
     );
