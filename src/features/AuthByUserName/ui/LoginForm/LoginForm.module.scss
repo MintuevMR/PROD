@@ -12,3 +12,14 @@
     margin-top: 15px;
     margin-left: auto;
 }
+
+.errorWrapper {
+    min-height: 24px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 5.5s ease;
+}
+
+.errorWrapper.visible {
+    opacity: 1;
+}
