@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { User } from 'entities/User/model/types/user';
-import { userActions, userReducer } from 'entities/User';
+import { userActions } from 'entities/User';
 import { USER_LOCAL_STORAGE_KEY } from 'shared/const/localStorage';
+import { ThunkExtraArg } from 'app/providers/StoreProvider';
 import { LoginSchema } from '../../types/loginSchema';
 
-export const loginByUserName = createAsyncThunk<User, Pick<LoginSchema, 'username' | 'password'>, { rejectValue: string }>(
+export const loginByUserName = createAsyncThunk<User, Pick<LoginSchema, 'username' | 'password'>, { rejectValue: string, extra: ThunkExtraArg }>(
     'login/loginByUserNmae',
     async (authData, thunkAPI) => {
         try {
-            const response = await axios.post('http://localhost:8000/login', authData);
+            const response = await thunkAPI.extra.api.post('/login', authData);
             if (!response.data) {
                 throw new Error('Ошибка авторизации');
             }
