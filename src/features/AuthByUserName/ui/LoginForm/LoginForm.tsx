@@ -11,6 +11,7 @@ import { getLoginPassword } from 'features/AuthByUserName/model/selectors/getLog
 import { getLoginUError } from 'features/AuthByUserName/model/selectors/getLoginError/getLoginError';
 import { getLoginIsLoading } from 'features/AuthByUserName/model/selectors/getLoginIsLoading/getLoginIsLoading';
 import DynamicModuleLoader, { ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import cls from './LoginForm.module.scss';
 
 export interface LoginFormProps {
@@ -22,7 +23,7 @@ const initialReducer: ReducerList = {
 };
 
 const LoginForm = memo(({ className }: LoginFormProps) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const username = useSelector(getLoginUsername);
     const password = useSelector(getLoginPassword);
@@ -42,7 +43,7 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
     }, [dispatch, username, password]);
 
     return (
-        <DynamicModuleLoader reducers={initialReducer}>
+        <DynamicModuleLoader reducers={initialReducer} removeAfterUnmount>
             <div className={classNames(cls.LoginForm, {}, [className])}>
                 <Text title="Авторизация" />
                 <div className={classNames(cls.errorWrapper, { [cls.visible]: error }, [])}>

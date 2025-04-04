@@ -10,14 +10,14 @@ export type ReducerList = {
 
 type ReducerListEntry = [StateSchemaKey, Reducer];
 
-const DynamicModuleLoader: FC<{ children: ReactNode, reducers: ReducerList, removeAfter?: boolean }> = (props) => {
+const DynamicModuleLoader: FC<{ children: ReactNode, reducers: ReducerList, removeAfterUnmount?: boolean }> = (props) => {
     const store = useStore() as reduxStoreWithManager;
     const dispatch = useDispatch();
 
     const {
         children,
         reducers,
-        removeAfter = true,
+        removeAfterUnmount,
     } = props;
 
     useEffect(() => {
@@ -27,9 +27,9 @@ const DynamicModuleLoader: FC<{ children: ReactNode, reducers: ReducerList, remo
         });
 
         return () => {
-            if (removeAfter) {
+            if (removeAfterUnmount) {
                 Object.entries(reducers).forEach(([keyName]: ReducerListEntry) => {
-                    store.reducerManager.remove('loginForm');
+                    store.reducerManager.remove(keyName);
                     dispatch({ type: `${keyName}/destroy` });
                 });
             }
