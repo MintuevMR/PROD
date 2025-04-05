@@ -17,7 +17,7 @@ export const loginByUserName = createAsyncThunk<User, Pick<LoginSchema, 'usernam
             thunkAPI.dispatch(userActions.setAuthData(response.data));
             return response.data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
+            return thunkAPI.rejectWithValue(error instanceof Error ? error.message : 'Unknown error occurred');
         }
     },
 );

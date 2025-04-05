@@ -21,15 +21,15 @@ const DynamicModuleLoader: FC<{ children: ReactNode, reducers: ReducerList, remo
     } = props;
 
     useEffect(() => {
-        Object.entries(reducers).forEach(([keyName, reducer]: ReducerListEntry) => {
-            store.reducerManager.add(keyName, reducer);
+        Object.entries(reducers).forEach(([keyName, reducer]) => {
+            store.reducerManager.add(keyName as StateSchemaKey, reducer);
             dispatch({ type: `${keyName}/init` });
         });
 
         return () => {
             if (removeAfterUnmount) {
-                Object.entries(reducers).forEach(([keyName]: ReducerListEntry) => {
-                    store.reducerManager.remove(keyName);
+                Object.entries(reducers).forEach(([keyName]) => {
+                    store.reducerManager.remove(keyName as StateSchemaKey);
                     dispatch({ type: `${keyName}/destroy` });
                 });
             }
