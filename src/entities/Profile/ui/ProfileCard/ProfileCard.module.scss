@@ -4,15 +4,18 @@
     width: 500px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-}
-
 .data {
     margin-top: 20px;
 
     .input {
         margin-top: 20px;
     }
+}
+
+.loading,
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
 }
