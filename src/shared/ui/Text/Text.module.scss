@@ -5,13 +5,31 @@
 }
 
 .title {
-    font: var(--font-l);
     color: var(--primary-color);
 }
 
 .description {
-    font: var(--font-m);
     color: var(--secondary-color);
+}
+
+.size_m {
+    .title {
+        font: var(--font-l);
+    }
+
+    .description {
+        font: var(--font-m);
+    }
+}
+
+.size_l {
+    .title {
+        font: var(--font-l);
+    }
+
+    .description {
+        font: var(--font-m);
+    }
 }
 
 .error {
