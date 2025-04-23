@@ -1,8 +1,10 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Comment } from 'entities/Comment/model/types/comment';
+import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import Text from 'shared/ui/Text/Text';
 import cls from './CommentList.module.scss';
-import CommentCard from '../CommentCard/CommentCard';
+import { CommentCard } from '../CommentCard/CommentCard';
+import { Comment } from '../../model/types/comment';
 
 interface CommentListProps {
     className?: string;
@@ -10,13 +12,21 @@ interface CommentListProps {
     isLoading?: boolean;
 }
 
-const CommentList = ({ className, comments, isLoading }: CommentListProps) => (
-    <div className={classNames(cls.CommentList, {}, [className])}>
-        {comments?.length
-            // eslint-disable-next-line react/no-array-index-key
-            ? comments.map((comment, index) => <CommentCard key={index} comment={comment} />)
-            : <Text title="No commets" />}
-    </div>
-);
+export const CommentList = memo((props: CommentListProps) => {
+    const { className, isLoading, comments } = props;
+    const { t } = useTranslation();
 
-export default CommentList;
+    return (
+        <div className={classNames(cls.CommentList, {}, [className])}>
+            {comments?.length
+                ? comments.map((comment) => (
+                    <CommentCard
+                        isLoading={isLoading}
+                        className={cls.comment}
+                        comment={comment}
+                    />
+                ))
+                : <Text description={t('Комментарии отсутствуют')} />}
+        </div>
+    );
+});

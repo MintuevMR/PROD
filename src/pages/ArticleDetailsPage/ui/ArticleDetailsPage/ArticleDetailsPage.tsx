@@ -1,34 +1,47 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { memo, useEffect } from 'react';
 import { ArticleDetails } from 'entities/Article';
 import { useParams } from 'react-router-dom';
+
 import { CommentList } from 'entities/Comment';
+import { useDispatch, useSelector } from 'react-redux';
+
 import DynamicModuleLoader, { ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { articleDeatailsCommentsReducer, getArticleDeatailsComment } from 'pages/ArticleDetailsPage/model/slice/articleDeatailsCommentSlice';
-import { useSelector } from 'react-redux';
-import { getArticleCommentsError, getArticleCommentsIsLoading } from 'pages/ArticleDetailsPage/model/selectors/comments';
+import Text from 'shared/ui/Text/Text';
+import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import cls from './ArticleDetailsPage.module.scss';
+import { articleDetailsCommentsReducer, getArticleComments } from '../../model/slices/articleDetailsCommentsSlice';
+import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 
 interface ArticleDetailsPageProps {
     className?: string;
-
 }
 
 const reducers: ReducerList = {
-    articleDetaildComments: articleDeatailsCommentsReducer,
+    articleDetailsComments: articleDetailsCommentsReducer,
 };
 
-const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
+const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
+    const { className } = props;
+    const { t } = useTranslation('article-details');
     const { id } = useParams<{ id: string }>();
+    const dispatch = useDispatch();
+    const comments = useSelector(getArticleComments.selectAll);
+    const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
 
-    const comments = useSelector(getArticleDeatailsComment.selectAll);
-    const isLoading = useSelector(getArticleCommentsIsLoading);
-    const error = useSelector(getArticleCommentsError);
+    useEffect(() => {
+        if (id) {
+            dispatch(fetchCommentsByArticleId(id));
+        }
+    }, [dispatch, id]);
+
+    console.log(comments);
 
     if (!id) {
         return (
             <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-                Статья не найдена
+                {t('Статья не найдена')}
             </div>
         );
     }
@@ -37,7 +50,11 @@ const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                 <ArticleDetails id={id} />
-                <CommentList comments={comments} isLoading={isLoading} />
+                <Text className={cls.commentTitle} title={t('Комментарии')} />
+                <CommentList
+                    isLoading={commentsIsLoading}
+                    comments={comments}
+                />
             </div>
         </DynamicModuleLoader>
     );
