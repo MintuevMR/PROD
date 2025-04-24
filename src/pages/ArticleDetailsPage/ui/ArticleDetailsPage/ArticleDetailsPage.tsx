@@ -36,8 +36,6 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
         }
     }, [dispatch, id]);
 
-    console.log(comments);
-
     if (!id) {
         return (
             <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
