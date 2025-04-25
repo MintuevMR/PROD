@@ -61,7 +61,7 @@ const ProfileCard = ({
                         </div>
                     )}
                 <Input
-                    value={data?.firstname}
+                    value={data?.first}
                     className={cls.input}
                     placeholder="Имя"
                     onChange={onChengeFirstName}

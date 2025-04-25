@@ -2,9 +2,12 @@ import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { classNames } from 'shared/lib/classNames/classNames';
 import Text from 'shared/ui/Text/Text';
 import { useSelector } from 'react-redux';
-import { getProfileReadOnly, profileActions, updateProfileeData } from 'entities/Profile';
+import {
+    getProfileData, getProfileReadOnly, profileActions, updateProfileeData,
+} from 'entities/Profile';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useCallback } from 'react';
+import { getUserAuthData } from 'entities/User';
 import cls from './ProfilePageHeader.module.scss';
 
 interface ProfilePageLoaderProps {
@@ -13,6 +16,11 @@ interface ProfilePageLoaderProps {
 
 const ProfilePageHeader = ({ className }: ProfilePageLoaderProps) => {
     const readOnly = useSelector(getProfileReadOnly);
+
+    const authdata = useSelector(getUserAuthData);
+    const profileData = useSelector(getProfileData);
+
+    const canEdit = authdata?.id === profileData?.id;
 
     const dispatch = useAppDispatch();
 
@@ -31,33 +39,40 @@ const ProfilePageHeader = ({ className }: ProfilePageLoaderProps) => {
     return (
         <div className={classNames(cls.ProfilePageHeader, {}, [className])}>
             <Text title="Профиль" />
-            {readOnly
-                ? (
-                    <Button
-                        theme={ThemeButton.OUTLINE}
-                        onClick={onToggleEdit}
-                    >
-                        Редактировать
-                    </Button>
-                )
-                : (
-                    <>
-                        <Button
-                            theme={ThemeButton.OUTLINE}
-                            className={cls.editBtn}
-                            onClick={onToggleCancelEdit}
-                        >
-                            Отменить
-                        </Button>
-                        <Button
-                            theme={ThemeButton.OUTLINE}
-                            className={cls.editBtn}
-                            onClick={onSave}
-                        >
-                            Сохранить
-                        </Button>
-                    </>
+
+            {canEdit
+                && (
+                    <div>
+                        {readOnly
+                            ? (
+                                <Button
+                                    theme={ThemeButton.OUTLINE}
+                                    onClick={onToggleEdit}
+                                >
+                                    Редактировать
+                                </Button>
+                            )
+                            : (
+                                <>
+                                    <Button
+                                        theme={ThemeButton.OUTLINE}
+                                        className={cls.editBtn}
+                                        onClick={onToggleCancelEdit}
+                                    >
+                                        Отменить
+                                    </Button>
+                                    <Button
+                                        theme={ThemeButton.OUTLINE}
+                                        className={cls.editBtn}
+                                        onClick={onSave}
+                                    >
+                                        Сохранить
+                                    </Button>
+                                </>
+                            )}
+                    </div>
                 )}
+
         </div>
     );
 };

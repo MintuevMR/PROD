@@ -19,6 +19,7 @@ import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
 import Text, { TextThemes } from 'shared/ui/Text/Text';
 import { ValidateProfileErrors } from 'entities/Profile/model/types/profile';
+import { useParams } from 'react-router-dom';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -37,6 +38,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     const isLoading = useSelector(getProfileLoading);
     const readOnly = useSelector(getProfileReadOnly);
     const validateError = useSelector(getProfileValidateErrors);
+    const { id } = useParams<{ id: string }>();
 
     const validateErrorsTranslate: Record<ValidateProfileErrors, string> = {
         [ValidateProfileErrors.INCORRECT_USER_DATA]: 'Имя и фамилия обязательны',
@@ -46,7 +48,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     };
 
     const onChengeFirstName = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ firstname: value || '' }));
+        dispatch(profileActions.updateProfile({ first: value || '' }));
     }, [dispatch]);
 
     const onChengeLastname = useCallback((value?: string) => {
@@ -62,8 +64,10 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchProfileData());
-    }, [dispatch]);
+        if (id) {
+            dispatch(fetchProfileData(id));
+        }
+    }, [dispatch, id]);
 
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>

@@ -5,10 +5,10 @@ export const validateProfileData = (profile?: Profile) => {
         return [ValidateProfileErrors.INCORRECT_USER_DATA];
     }
 
-    const { firstname, lastname } = profile;
+    const { first, lastname } = profile;
     const errors: ValidateProfileErrors[] = [];
 
-    if (!firstname?.trim() || !lastname?.trim()) {
+    if (!first?.trim() || !lastname?.trim()) {
         errors.push(ValidateProfileErrors.INCORRECT_USER_DATA);
     }
 

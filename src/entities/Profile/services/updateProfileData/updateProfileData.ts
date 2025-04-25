@@ -4,7 +4,9 @@ import { getProfileForm } from 'entities/Profile/model/selectors/getProfileForm/
 import { Profile, ValidateProfileErrors } from 'entities/Profile/model/types/profile';
 import { validateProfileData } from '../validateProfile/validateProfile';
 
-export const updateProfileeData = createAsyncThunk<Profile, void, { rejectValue: ValidateProfileErrors[], extra: ThunkExtraArg, state: StateSchema }>(
+type ThunkArg = { rejectValue: ValidateProfileErrors[], extra: ThunkExtraArg, state: StateSchema };
+
+export const updateProfileeData = createAsyncThunk<Profile, void, ThunkArg>(
     'profile/updateProfileeData',
     async (_, thunkAPI) => {
         const formData = getProfileForm(thunkAPI.getState());
@@ -16,7 +18,7 @@ export const updateProfileeData = createAsyncThunk<Profile, void, { rejectValue:
         }
 
         try {
-            const response = await thunkAPI.extra.api.put<Profile>('/profile', formData);
+            const response = await thunkAPI.extra.api.put<Profile>(`/profile/${formData?.id}`, formData);
 
             return response.data;
         } catch (error) {

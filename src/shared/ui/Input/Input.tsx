@@ -27,11 +27,12 @@ const Input = memo((props: InputProps) => {
 
     return (
         <div className={classNames(cls.Input, {}, [className])}>
-            {placeholder && (
+            {/* {placeholder && (
                 <div className={cls.placeholder}>{placeholder}</div>
-            )}
+            )} */}
             <input
                 value={value}
+                placeholder={placeholder}
                 type={type}
                 onChange={onChangeHandler}
                 className={cls.input}
