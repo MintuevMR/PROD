@@ -1,3 +1,5 @@
+import { User } from 'entities/User/model/types/user';
+
 export type ArticleType = 'IT' | 'ECONIMIC';
 
 export interface ArticlBaseBlock {
@@ -24,9 +26,15 @@ export interface ArticleImageBlock extends ArticlBaseBlock {
 
 export type ActicleBlock = ArticleTextBlock | ArticleCodeBlock | ArticleImageBlock;
 
+export enum ArticleView {
+    SMALL = 'SMALL',
+    BIG = 'BIG',
+}
+
 export interface Article {
     id: string;
     title: string;
+    user: User
     subtitle: string;
     img: string;
     views: number,

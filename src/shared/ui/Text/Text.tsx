@@ -34,7 +34,7 @@ const Text = memo((props: TextProps) => {
     } = props;
     return (
         <div className={classNames(cls.Text, {}, [className, cls[align], cls[size], cls[theme]])}>
-            {title && <h1 className={cls.title}>{title}</h1>}
+            {title && <p className={cls.title}>{title}</p>}
             {description && <p className={cls.description}>{description}</p>}
         </div>
     );
