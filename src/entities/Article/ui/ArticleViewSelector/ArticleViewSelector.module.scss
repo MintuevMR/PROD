@@ -1,0 +1,10 @@
+.ArticleViewSelector {
+    margin-left: auto;
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected {
+    color: red;
+}
