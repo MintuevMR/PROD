@@ -20,6 +20,7 @@ import { Country } from 'entities/Country';
 import Text, { TextThemes } from 'shared/ui/Text/Text';
 import { ValidateProfileErrors } from 'entities/Profile/model/types/profile';
 import { useParams } from 'react-router-dom';
+import Page from 'shared/ui/Page/Page';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -71,7 +72,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
 
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-            <div className={classNames('', {}, [className])}>
+            <Page className={classNames('', {}, [className])}>
                 <ProfilePageHeader />
                 {validateError?.length && validateError.map((error) => (
                     <Text key={error} title={validateErrorsTranslate[error]} theme={TextThemes.ERROR} />
@@ -86,7 +87,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
                     onChangeCurrency={onChangeCurrency}
                     onChangeCountry={onChangeCountry}
                 />
-            </div>
+            </Page>
         </DynamicModuleLoader>
     );
 };
