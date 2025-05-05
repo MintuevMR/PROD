@@ -7,7 +7,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { fetchArticlesList } from 'pages/ArticlesPage/model/services/fetchArticlesList';
 import { useSelector } from 'react-redux';
 import { getArticlesPageInited, getArticlesPageisLoading, getArticlesPageView } from 'pages/ArticlesPage/model/selectors/articlesPageSelectors';
-import Page from 'shared/ui/Page/Page';
+import Page from 'widgets/Page/Page';
 import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage';
 import cls from './ArticlesPage.module.scss';
 

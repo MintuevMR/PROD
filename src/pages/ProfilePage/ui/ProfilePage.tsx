@@ -20,7 +20,7 @@ import { Country } from 'entities/Country';
 import Text, { TextThemes } from 'shared/ui/Text/Text';
 import { ValidateProfileErrors } from 'entities/Profile/model/types/profile';
 import { useParams } from 'react-router-dom';
-import Page from 'shared/ui/Page/Page';
+import Page from 'widgets/Page/Page';
 import ProfilePageHeader from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
