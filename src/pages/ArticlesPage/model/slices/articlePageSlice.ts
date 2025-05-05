@@ -26,6 +26,7 @@ const articlesPageSlice = createSlice({
         page: 1,
         // limit: 3,
         hasMore: true,
+        _inited: false,
     }),
     reducers: {
         setView: (state, action: PayloadAction<ArticleView>) => {
@@ -37,6 +38,7 @@ const articlesPageSlice = createSlice({
         },
         initState: (state) => {
             state.limit = state.view === ArticleView.SMALL ? 3 : 9;
+            state._inited = true;
         },
     },
     extraReducers: (builder) => {

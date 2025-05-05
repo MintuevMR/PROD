@@ -17,7 +17,7 @@ const DynamicModuleLoader: FC<{ children: ReactNode, reducers: ReducerList, remo
     const {
         children,
         reducers,
-        removeAfterUnmount,
+        removeAfterUnmount = true,
     } = props;
 
     useEffect(() => {
