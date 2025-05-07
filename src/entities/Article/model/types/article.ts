@@ -2,6 +2,11 @@ import { User } from 'entities/User/model/types/user';
 
 export type ArticleType = 'IT' | 'ECONIMIC';
 
+export enum ArtcileSortField {
+    VIEWS = 'views',
+    TITLE = 'title',
+    CREATED = 'createdAt'
+}
 export interface ArticlBaseBlock {
     id: string;
     type: 'TEXT' | 'IMAGE' | 'CODE';
