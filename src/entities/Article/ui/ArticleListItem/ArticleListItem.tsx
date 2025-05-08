@@ -33,7 +33,7 @@ const ArticleListItem = ({ className, article, view }: ArticleListItemProps) => 
                         <ArticleTextBlockComponent block={textBlock} className={cls.textBlock} />
                     )}
                     <div className={cls.footer}>
-                        <AppLink target="_blank" to={RoutePath.articles_details + article.id}>
+                        <AppLink to={RoutePath.articles_details + article.id}>
                             <Button theme={ThemeButton.OUTLINE}>
                                 Читать далее...
                             </Button>
@@ -46,7 +46,7 @@ const ArticleListItem = ({ className, article, view }: ArticleListItemProps) => 
     }
 
     return (
-        <AppLink target="_blank" to={RoutePath.articles_details + article.id} className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
+        <AppLink to={RoutePath.articles_details + article.id} className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
             <Card className={cls.card}>
                 <div className={cls.imageWrapper}>
                     <img src={article.img} alt={article.title} className={cls.img} />

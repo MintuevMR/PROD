@@ -6,7 +6,11 @@ export const fetchArticleById = createAsyncThunk<Article, string, { rejectValue:
     'articleDetails/fetchArticleById',
     async (id, thunkAPI) => {
         try {
-            const response = await thunkAPI.extra.api.get<Article>(`/articles/${id}`);
+            const response = await thunkAPI.extra.api.get<Article>(`/articles/${id}`, {
+                params: {
+                    _expand: 'user',
+                },
+            });
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error instanceof Error ? error.message : 'Unknown error occurred');
