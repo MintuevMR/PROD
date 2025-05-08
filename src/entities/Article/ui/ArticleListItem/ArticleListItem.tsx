@@ -4,7 +4,8 @@ import Text from 'shared/ui/Text/Text';
 import Card from 'shared/ui/Card/Card';
 import Avatar from 'shared/ui/Avatar/Avatar';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import { AppLink } from 'shared/ui/AppLink/AppLink';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import cls from './ArticleListItem.module.scss';
 import ArticleTextBlockComponent from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 
@@ -15,12 +16,6 @@ interface ArticleListItemProps {
 }
 
 const ArticleListItem = ({ className, article, view }: ArticleListItemProps) => {
-    const navigate = useNavigate();
-
-    const onOpenArticle = () => {
-        navigate(article.id.toString());
-    };
-
     if (view === ArticleView.BIG) {
         const textBlock = article.blocks.find((block) => block.type === 'TEXT') as ArticleTextBlock;
         return (
@@ -38,9 +33,11 @@ const ArticleListItem = ({ className, article, view }: ArticleListItemProps) => 
                         <ArticleTextBlockComponent block={textBlock} className={cls.textBlock} />
                     )}
                     <div className={cls.footer}>
-                        <Button theme={ThemeButton.OUTLINE} onClick={onOpenArticle}>
-                            Читать далее...
-                        </Button>
+                        <AppLink target="_blank" to={RoutePath.articles_details + article.id}>
+                            <Button theme={ThemeButton.OUTLINE}>
+                                Читать далее...
+                            </Button>
+                        </AppLink>
                         <Text title={String(article.views)} className={cls.views} />
                     </div>
                 </Card>
@@ -49,7 +46,7 @@ const ArticleListItem = ({ className, article, view }: ArticleListItemProps) => 
     }
 
     return (
-        <div onClick={onOpenArticle} className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
+        <AppLink target="_blank" to={RoutePath.articles_details + article.id} className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
             <Card className={cls.card}>
                 <div className={cls.imageWrapper}>
                     <img src={article.img} alt={article.title} className={cls.img} />
@@ -61,7 +58,7 @@ const ArticleListItem = ({ className, article, view }: ArticleListItemProps) => 
                 </div>
                 <Text title={article.title} className={cls.title} />
             </Card>
-        </div>
+        </AppLink>
     );
 };
 
